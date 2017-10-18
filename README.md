@@ -23,5 +23,7 @@ Example
 
 ```
 $ ./telnum +447444123456 +351217988000 +17034800500
-[{'phonetype': 'mobile', 'country': 'United Kingdom', 'city': 'United Kingdom', 'carrier': 'Vodafone', 'number': '+44 7444 123456'}, {'phonetype': 'fixed-line', 'country': 'Portugal', 'city': 'Lisbon', 'number': '+351 21 798 8000'}, {'phonetype': 'fixed-line or mobile', 'country': 'United States', 'city': 'Virginia', 'number': '+1 703-480-0500'}]      
+[{'phonetype': 'mobile', 'country': 'United Kingdom', 'city': 'United Kingdom', 'carrier': 'Vodafone', 'number': '+44 7444 123456'}, 
+{'phonetype': 'fixed-line', 'country': 'Portugal', 'city': 'Lisbon', 'number': '+351 21 798 8000'}, 
+{'phonetype': 'fixed-line or mobile', 'country': 'United States', 'city': 'Virginia', 'number': '+1 703-480-0500'}]      
 ```
