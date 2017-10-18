@@ -23,12 +23,4 @@ Example
 
 ```
 $ ./telnum +447444123456 +442083661177 +1800VANITY 08002462468      
-+44 7444 123456
-United Kingdom - mobile
-+44 20 8366 1177
-London, United Kingdom - fixed-line
-+1 800826489
- - unknown type
-08002462468
-invalid
 ```
