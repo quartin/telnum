@@ -4,9 +4,13 @@ import sys
 
 try:
     import phonenumbers
-    from phonenumbers import geocoder, PhoneNumberType
+    from phonenumbers import geocoder, PhoneNumberType, carrier
 except:
     sys.stderr.write('Could not find module "phonenumbers".\nTry `pip3 install phonenumbers`.\n')
+try:
+    import rapidjson
+except: 
+    sys.stderr.write('Could not find module "rapidjson".\nTry `pip3 install python-rapidjson`.\n')
 
 if len(sys.argv) > 1:
     nums = sys.argv[1:]
@@ -14,6 +18,7 @@ else:
     nums = sys.stdin.readlines()
     nums = map(strip, nums)
 
+json_array = []
 for num in nums:
     try:
         x = phonenumbers.parse(num)
@@ -48,11 +53,18 @@ for num in nums:
         numtype = number_type_desc(phonenumbers.number_type(x))
         country = geocoder.country_name_for_number(x, "en")
         desc = geocoder.description_for_number(x, "en")
+        carrier_name = carrier.name_for_number(x, "en")
+        
+        def remove_empty_fields(s):
+            return {out: i for out, i in s.items() if i is not ''}
 
-        if not desc or desc == country:
-            print('%s\n%s - %s' % (number, country, numtype))
-        else:
-            print('%s\n%s, %s - %s' % (number, desc, country, numtype))
+        output = {'number': number, 'carrier': carrier_name, 'city': desc, 'country': country, 'phonetype': numtype}
 
-    except:
-        print('%s\ninvalid' % (num))
+        jsonstr = rapidjson.dumps(output)
+        json_out = rapidjson.loads(jsonstr, object_hook = remove_empty_fields)
+        json_array.append(json_out)
+
+    except Exception as e:
+        print(e)
+
+print(json_array)
