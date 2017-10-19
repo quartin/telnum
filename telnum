@@ -62,9 +62,10 @@ for num in nums:
 
         jsonstr = rapidjson.dumps(output)
         json_out = rapidjson.loads(jsonstr, object_hook = remove_empty_fields)
-        json_array.append(json_out)
 
     except Exception as e:
-        print(e)
+        json_out = {'number': num, 'error': str(e)}
+
+    json_array.append(json_out)
 
 print(json_array)
